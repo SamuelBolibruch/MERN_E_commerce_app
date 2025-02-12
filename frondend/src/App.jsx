@@ -7,6 +7,16 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import CollectionPage from "./pages/CollectionPage";
 import ProductDetails from "./components/Products/ProductDetails";
+import Checkout from "./components/Cart/Checkout.jsx";
+import OrderConfirmationPage from "./pages/OrderConfirmationPage.jsx";
+import OrderDetailsPage from "./pages/OrderDetailsPage.jsx";
+import MyOrdersPage from "./pages/MyOrdersPage.jsx";
+import AdminLayout from "./components/Admin/AdminLayout.jsx";
+import AdminHomePage from "./pages/AdminHomePage.jsx";
+import UserManagement from "./components/Admin/UserManagement.jsx";
+import ProductManagement from "./components/Admin/ProductManagement.jsx";
+import EditProductPage from "./components/Admin/EditProductPage.jsx";
+import OrderManagement from "./components/Admin/OrderManagement.jsx";
 
 const App = () => {
   return (
@@ -20,8 +30,21 @@ const App = () => {
           <Route path="profile" element={<Profile />} />
           <Route path="collections/:collection" element={<CollectionPage />} />
           <Route path="product/:id" element={<ProductDetails />} />
+          <Route path="checkout" element={<Checkout />} />
+          <Route
+            path="order-confirmation"
+            element={<OrderConfirmationPage />}
+          />
+          <Route path="order/:id" element={<OrderDetailsPage />} />
+          <Route path="my-orders" element={<MyOrdersPage />} />
         </Route>
-        <Route>{/* Admin Layout */}</Route>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminHomePage />} />
+          <Route path="users" element={<UserManagement />} />
+          <Route path="products" element={<ProductManagement />} />
+          <Route path="products/:id/edit" element={<EditProductPage />} />
+          <Route path="orders" element={<OrderManagement />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
