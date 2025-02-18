@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const NewArrivals = () => {
   const scrollRef = useRef(null);
@@ -9,96 +10,23 @@ const NewArrivals = () => {
   const [scrollLeft, setScrollLeft] = useState(false);
   const [canScrollLeft, setCanScrollLeft] = useState(true);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const newArrivals = [
-    {
-      _id: "1",
-      name: "Stylish Jacket",
-      price: 120,
-      images: [
-        {
-          url: "https://picsum.photos/500/500?random=1",
-          alt: "Stylish Jacket",
-        },
-      ],
-    },
-    {
-      _id: "2",
-      name: "Stylish Jacket",
-      price: 120,
-      images: [
-        {
-          url: "https://picsum.photos/500/500?random=2",
-          alt: "Stylish Jacket",
-        },
-      ],
-    },
-    {
-      _id: "3",
-      name: "Stylish Jacket",
-      price: 120,
-      images: [
-        {
-          url: "https://picsum.photos/500/500/?andom=3",
-          alt: "Stylish Jacket",
-        },
-      ],
-    },
-    {
-      _id: "4",
-      name: "Stylish Jacket",
-      price: 120,
-      images: [
-        {
-          url: "https://picsum.photos/500/500?random=4",
-          alt: "Stylish Jacket",
-        },
-      ],
-    },
-    {
-      _id: "5",
-      name: "Stylish Jacket",
-      price: 120,
-      images: [
-        {
-          url: "https://picsum.photos/500/500?random=5",
-          alt: "Stylish Jacket",
-        },
-      ],
-    },
-    {
-      _id: "6",
-      name: "Stylish Jacket",
-      price: 120,
-      images: [
-        {
-          url: "https://picsum.photos/500/500?random=6",
-          alt: "Stylish Jacket",
-        },
-      ],
-    },
-    {
-      _id: "7",
-      name: "Stylish Jacket",
-      price: 120,
-      images: [
-        {
-          url: "https://picsum.photos/500/500?random=7",
-          alt: "Stylish Jacket",
-        },
-      ],
-    },
-    {
-      _id: "8",
-      name: "Stylish Jacket",
-      price: 120,
-      images: [
-        {
-          url: "https://picsum.photos/500/500?random=8",
-          alt: "Stylish Jacket",
-        },
-      ],
-    },
-  ];
+
+  const [newArrivals, setNewArrivals] = useState([]);
+
+  useEffect(() => {
+    const fetchNewArrivals = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/products/new-arrivals`
+        );
+        setNewArrivals(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchNewArrivals();
+  }, []);
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
@@ -145,7 +73,7 @@ const NewArrivals = () => {
       };
     }
   }, []);
-  
+
   return (
     <section className="py-16 px-4 lf:px-0">
       <div className="container mx-auto text-center mb-10 relative">
