@@ -65,7 +65,7 @@ export const deleteUser = createAsyncThunk("admin/deleteUser", async (id) => {
 const adminSlice = createSlice({
   name: "admin",
   initialState: {
-    users: [],
+    user: [],
     loading: false,
     error: null,
   },
@@ -78,7 +78,7 @@ const adminSlice = createSlice({
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.loading = false;
-        state.users = action.payload;
+        state.user = action.payload;
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.loading = false;

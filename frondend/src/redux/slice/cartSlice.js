@@ -2,9 +2,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const loadCartFromStorage = () => {
-  const storedCart = localStorage.getItem("cart");
-  return storedCart ? JSON.parse(storedCart) : { products: [] };
+  try {
+    return JSON.parse(localStorage.getItem("cart")) || { products: [] };
+  } catch {
+    return { products: [] };
+  }
 };
+
 
 const saveCartToStorage = (cart) => {
   localStorage.setItem("cart", JSON.stringify(cart));
@@ -99,7 +103,7 @@ export const mergeCart = createAsyncThunk(
   "cart/mergeCart",
   async ({ guestId, user }, { rejectWithValue }) => {
     try {
-      const response = axios.post(
+      const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/cart/merge`,
         { guestId, user },
         {

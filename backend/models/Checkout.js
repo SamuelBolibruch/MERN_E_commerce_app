@@ -38,7 +38,7 @@ const checkoutScheme = new mongoose.Schema(
     },
     checkoutItems: [checkoutItemSchema],
     shippingAddress: {
-      adress: {
+      address: {
         type: String,
         required: true,
       },

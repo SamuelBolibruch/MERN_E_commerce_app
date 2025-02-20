@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Hero from "../components/Layout/Hero";
 import FeauturedCollection from "../components/Products/FeauturedCollection";
 import FeauturesSection from "../components/Products/FeauturesSection";
@@ -45,13 +45,17 @@ const Home = () => {
 
       {/* Best Seller */}
       <h2 className="text-3xl text-center font-bold mb-4">Best Seller</h2>
-      <ProductDetails />
+      {bestSellerProduct ? (
+        <ProductDetails productId={bestSellerProduct._id} />
+      ) : (
+        <p className="text-center">Loading best seller product...</p>
+      )}
 
       <div className="container mx-auto">
         <h2 className="text-3xl text-center font-bold mb-4">
           Top Wears for Women
         </h2>
-        <ProductGrid products={placeholderProducts} />
+        <ProductGrid products={products} loading={loading} error={error} />
       </div>
 
       <FeauturedCollection />

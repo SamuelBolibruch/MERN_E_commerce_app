@@ -29,6 +29,8 @@ router.post("/", protect, async (req, res) => {
       isPaid: false,
     });
     console.log(`Checkout created for user: ${req.user._id}`);
+    console.log(newCheckout);
+    
     res.status(201).json(newCheckout);
   } catch (error) {
     console.log("Error creating checkout session: ", error);

@@ -1,41 +1,24 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
+import { fetchOrderDetails } from "../redux/slice/orderSlice";
 
 const OrderDetailsPage = () => {
   const { id } = useParams();
-  const [orderDetails, setOrderDetails] = useState(null);
+  const dispatch = useDispatch();
+  const { orderDetails, loading, error } = useSelector((state) => state.orders);
 
   useEffect(() => {
-    const mockOrderDetails = {
-      _id: id,
-      createdAt: new Date(),
-      isPaid: true,
-      isDelivered: false,
-      paymentMethod: "PayPal",
-      shippingMethod: "Standart",
-      shippingAddress: {
-        city: "New York",
-        country: "USA",
-      },
-      orderItems: [
-        {
-          productId: "123",
-          name: "Product 1",
-          price: 120,
-          quantity: 2,
-          image: "https://picsum.photos/200?rndom=1",
-        },
-        {
-          productId: "412412",
-          name: "Product 2",
-          price: 20,
-          quantity: 1,
-          image: "https://picsum.photos/200?rndom=2",
-        },
-      ],
-    };
-    setOrderDetails(mockOrderDetails);
-  }, [id]);
+    dispatch(fetchOrderDetails(id));
+  }, [dispatch, id]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
   return (
     <div className="max-w-7xl mx-auto p-4 sm:p-6">
       <h2 className="text-2xl md:text-3xl font-bold mb-6">Order Details</h2>
@@ -121,7 +104,7 @@ const OrderDetailsPage = () => {
                       </Link>
                     </td>
                     <td className="py-2 px-4">{item.price}€</td>
-                    <td className="py-2 px-4">{item.quantity}€</td>
+                    <td className="py-2 px-4">{item.quantity}</td>
                     <td className="py-2 px-4">{item.price * item.quantity}€</td>
                   </tr>
                 ))}
@@ -129,7 +112,9 @@ const OrderDetailsPage = () => {
             </table>
           </div>
           {/* Back to Orders Page */}
-          <Link to="/my-orders" className="text-blue-500 hover:underline">Back to My Orders</Link>
+          <Link to="/my-orders" className="text-blue-500 hover:underline">
+            Back to My Orders
+          </Link>
         </div>
       )}
     </div>
