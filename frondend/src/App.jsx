@@ -17,7 +17,7 @@ import UserManagement from "./components/Admin/UserManagement.jsx";
 import ProductManagement from "./components/Admin/ProductManagement.jsx";
 import EditProductPage from "./components/Admin/EditProductPage.jsx";
 import OrderManagement from "./components/Admin/OrderManagement.jsx";
-import ProtectedRoute from "./components/common/ProtectedRoute";
+import ProtectedRoute from "./components/Common/ProtectedRoute";
 
 import { Provider } from "react-redux";
 import store from "./redux/store";
