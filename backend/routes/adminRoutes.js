@@ -32,7 +32,7 @@ router.post("/users", protect, admin, async (req, res) => {
     user = new User({ name, email, password, role: role || "customer" });
     await user.save();
 
-    res.status(201).json({ message: "User created successfully" });
+    res.status(201).json({ message: "User created successfully", user: user });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Server Error" });

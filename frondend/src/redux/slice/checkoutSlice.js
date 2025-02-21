@@ -13,7 +13,7 @@ export const createCheckout = createAsyncThunk(
             Authorization: `Bearer ${localStorage.getItem("userToken")}`,
           },
         }
-      );      
+      );
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -37,7 +37,6 @@ const checkoutSlice = createSlice({
       })
       .addCase(createCheckout.fulfilled, (state, action) => {
         state.loading = false;
-        console.log(action);
         state.checkout = action.payload;
       })
       .addCase(createCheckout.rejected, (state, action) => {

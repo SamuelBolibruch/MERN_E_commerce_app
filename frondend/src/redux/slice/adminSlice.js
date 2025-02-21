@@ -65,7 +65,7 @@ export const deleteUser = createAsyncThunk("admin/deleteUser", async (id) => {
 const adminSlice = createSlice({
   name: "admin",
   initialState: {
-    user: [],
+    users: [],
     loading: false,
     error: null,
   },
@@ -78,14 +78,14 @@ const adminSlice = createSlice({
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload;
+        state.users = action.payload;
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
-        const updatedUser = action.payload;
+        const updatedUser = action.payload.user;
         const userIndex = state.users.findIndex(
           (user) => user._id === updatedUser._id
         );
@@ -103,6 +103,7 @@ const adminSlice = createSlice({
       })
       .addCase(addUser.fulfilled, (state, acton) => {
         state.loading = false;
+        console.log(acton.payload);
         state.users.push(acton.payload.user);
       })
       .addCase(addUser.rejected, (state, action) => {

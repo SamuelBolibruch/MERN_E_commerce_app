@@ -22,7 +22,11 @@ router.get("/", protect, admin, async (req, res) => {
 // @access Private/Admin
 router.put("/:id", protect, admin, async (req, res) => {
   try {
-    const order = await Order.findById(req.params.id);
+    let order = await Order.findById(req.params.id).populate(
+      "user",
+      "name email"
+    ); // Pridá meno a e-mail používateľa
+
     if (order) {
       order.status = req.body.status || order.status;
       order.isDelivered =
