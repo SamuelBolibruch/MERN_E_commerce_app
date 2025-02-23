@@ -83,4 +83,4 @@ This is a **complete e-commerce application** that simulates the full e-commerce
 - **Sonner**: For toast notifications.  
 
 ## Deployment
-This application is deployed on **[Vercel](https://e-commerce-app-frontend-two.vercel.app)**, allowing seamless access and testing.
+This application is deployed on **[Vercel](https://mern-e-commerce-app-sigma.vercel.app)**, allowing seamless access and testing.
